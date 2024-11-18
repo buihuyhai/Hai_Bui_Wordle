@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HaiBui_wordle")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a39fb8a3ae6544f4255a62ca84bf50384ca057a1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3864556d6e946e284d974003ccfde06903616799")]
 [assembly: System.Reflection.AssemblyProductAttribute("HaiBui_wordle")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HaiBui_wordle")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

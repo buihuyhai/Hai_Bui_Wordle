@@ -35,7 +35,8 @@ void PlayGame()
     List<string> words = jsonArray.Select(item => item["word"].ToString()).ToList();
 
     Random random = new Random();
-    string randomWord = words[random.Next(words.Count)];
+    //string randomWord = words[random.Next(words.Count)];
+    string randomWord = "glass";
     Console.WriteLine($"Correct word (for testing): {randomWord}");
     char[] wordrandom = StringToArray(randomWord);
 
@@ -65,16 +66,15 @@ void PlayGame()
 
         char[] guessArray = StringToArray(inputGuess);
         char[] resultArray = new char[5];
+        bool[] letterUsed = new bool[5]; 
 
+      
         for (int i = 0; i < 5; i++)
         {
             if (guessArray[i] == wordrandom[i])
             {
                 resultArray[i] = '^';
-            }
-            else if (wordrandom.Contains(guessArray[i]))
-            {
-                resultArray[i] = '*';
+                letterUsed[i] = true; 
             }
             else
             {
@@ -82,12 +82,27 @@ void PlayGame()
             }
         }
 
+        
+        for (int i = 0; i < 5; i++)
+        {
+            if (resultArray[i] != '^')
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    if (!letterUsed[j] && guessArray[i] == wordrandom[j])
+                    {
+                        resultArray[i] = '*';
+                        letterUsed[j] = true; 
+                        break;
+                    }
+                }
+            }
+        }
 
         string guessResult = $"| {string.Join(" ", guessArray)} |";
         string feedbackResult = $"| {string.Join(" ", resultArray)} |";
         attemptsHistory.Add(guessResult);
         attemptsHistory.Add(feedbackResult);
-
 
         Console.WriteLine("-------------");
         foreach (var attemptLine in attemptsHistory)
@@ -132,30 +147,38 @@ void PlayGame()
         else
         {
             Console.WriteLine("Invalid input, please enter 'y' or 'n'.");
+
         }
     }
 }
-
-Console.WriteLine("--------------WELCOME TO WORDLE GAME--------------");
-Console.WriteLine("\n------------------------------------------------");
-Console.WriteLine("--             Hai_l3ui Wordle!               --");
-Console.WriteLine("--        Guess the Wordle in 6 tries         --");
-Console.WriteLine("------------------------------------------------");
-
-Console.WriteLine();
-Console.WriteLine("Would you like to play Hai_l3ui Wordle? [y/n]?");
-
-Console.Write("Your answer: ");
-string startInput = Console.ReadLine().ToLower();
-if (startInput == "y")
+void Game()
 {
-    PlayGame();
+    Console.WriteLine("--------------WELCOME TO WORDLE GAME--------------");
+    Console.WriteLine("\n------------------------------------------------");
+    Console.WriteLine("--             Hai_l3ui Wordle!               --");
+    Console.WriteLine("--        Guess the Wordle in 6 tries         --");
+    Console.WriteLine("------------------------------------------------");
+
+    Console.WriteLine();
+    Console.WriteLine("Would you like to play Hai_l3ui Wordle? [y/n]?");
+
+    Console.Write("Your answer: ");
+    string startInput = Console.ReadLine().ToLower();
+    if (startInput == "y")
+    {
+        PlayGame();
+    }
+    else if (startInput == "n")
+    {
+        DisplaySummary();
+    }
+    else
+    {
+        Console.WriteLine("Invalid input, please enter 'y' or 'n'.");
+        Console.WriteLine();
+        Game();
+    }
 }
-else if (startInput == "n")
-{
-    DisplaySummary();
-}
-else
-{
-    Console.WriteLine("Invalid input, please enter 'y' or 'n'.");
-}
+Game();
+
+
