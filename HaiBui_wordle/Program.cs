@@ -35,8 +35,8 @@ void PlayGame()
     List<string> words = jsonArray.Select(item => item["word"].ToString()).ToList();
 
     Random random = new Random();
-    //string randomWord = words[random.Next(words.Count)];
-    string randomWord = "glass";
+    string randomWord = words[random.Next(words.Count)];
+    //string randomWord = "glass";
     Console.WriteLine($"Correct word (for testing): {randomWord}");
     char[] wordrandom = StringToArray(randomWord);
 
